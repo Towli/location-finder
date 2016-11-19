@@ -1,7 +1,9 @@
-package uk.ac.uea.roomfinder;
+package uk.ac.uea.roomfinder.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import uk.ac.uea.roomfinder.R;
 
 public class MainActivity extends AppCompatActivity {
 
