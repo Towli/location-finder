@@ -24,5 +24,6 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="52dp" />
+        android:layout_marginTop="52dp"
+        android:id="@+id/location_list" />
 </RelativeLayout>

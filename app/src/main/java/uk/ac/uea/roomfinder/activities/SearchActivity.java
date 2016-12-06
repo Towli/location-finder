@@ -15,21 +15,46 @@ public class SearchActivity extends AppCompatActivity {
 
     ArrayAdapter<String> adapter;
 
-    String[] testItems = {"Location 1", "Location 2", "Location 3", "Location 4", "Location 5",
-            "Location 6"};
+    String[] testItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_search);
 
+        /* Populate array for test purposes */
+        testItems = populateTestArray();
+
         listView = (ListView)findViewById(R.id.list_view);
         searchView = (SearchView)findViewById(R.id.search_view);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, testItems);
 
         listView.setAdapter(adapter);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
-
+    /**
+     * A method for populating a test array for prototyping
+     * @return
+     */
+    String[] populateTestArray() {
+        String[] array = new String[20];
+        for(int i = 0; i < array.length; i++) {
+            array[i] = "Location " + i;
+        }
+        return array;
+    }
 
 }
