@@ -29,8 +29,10 @@ public class SearchActivity extends AppCompatActivity {
         searchView = (SearchView)findViewById(R.id.search_view);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, testItems);
 
+        /* Set the data for the ListView */
         listView.setAdapter(adapter);
 
+        /* Set query listener on SearchView */
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
