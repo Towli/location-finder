@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/view_details"
     android:layout_width="match_parent"
@@ -17,5 +18,33 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="108dp"
-        android:id="@+id/roomName" />
+        android:id="@+id/name_tv" />
+
+    <Button
+        android:text="Route"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="73dp"
+        android:onClick="mapActivity"
+        android:id="@+id/route_btn" />
+
+    <ImageView
+        android:layout_width="300px"
+        android:layout_height="300px"
+        app:srcCompat="@android:drawable/ic_menu_gallery"
+        android:id="@+id/imageView"
+        android:layout_above="@+id/route_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="17dp" />
+
+    <TextView
+        android:text="Location description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/description_tv"
+        android:layout_below="@+id/name_tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp" />
 </RelativeLayout>
