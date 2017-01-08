@@ -32,7 +32,6 @@ public class BrowseActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, testItems);
         listView.setAdapter(adapter);
 
-
         /* Set an OnClick listener for items in ListView */
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
