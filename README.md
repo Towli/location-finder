@@ -1,29 +1,15 @@
-# README #
+# Location Finder #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+## Summary ##
+An android application that provides an interface for searching for & routing to a location on University of East Anglia's campus.
 
-### What is this repository for? ###
+## Development - Framework Integration ##
+Integrate the UEA Open Day Android Application Framework by creating a directory inside 
+```
+app/src/main/java/uk/ac/uea/roomfinder/
+```
+to sit with the /activity/ and /model/ directories.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+The framework can be found [here.](https://bitbucket.org/teamindustry/uea-se-framework)
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+*A.Towli*
