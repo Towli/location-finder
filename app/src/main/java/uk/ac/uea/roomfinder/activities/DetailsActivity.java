@@ -24,7 +24,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void mapActivity(View view) {
-        Intent i = new Intent(this, MapActivity.class);
+        Intent i = new Intent(this, MapsActivity.class);
         startActivity(i);
     }
 
