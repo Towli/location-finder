@@ -9,27 +9,31 @@ import java.util.Arrays;
 
 import uk.ac.uea.roomfinder.R;
 import uk.ac.uea.roomfinder.framework.implementation.AndroidCSVParser;
+import uk.ac.uea.roomfinder.framework.implementation.Building;
 import uk.ac.uea.roomfinder.framework.implementation.Site;
 
 public class MainActivity extends AppCompatActivity {
+
+    Site site;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_main);
 
-        Site s = new Site();
-        s.setBuildings(new AndroidCSVParser().parse("map_data.csv", this));
-        System.out.println(s.getBuildings().get(0).getName());
+        site = new Site();
+        site.setBuildings(new AndroidCSVParser().parse("map_data.csv", this));
     }
 
     public void browseActivity(View view) {
         Intent i = new Intent(this, BrowseActivity.class);
+        i.putExtra("site", site);
         startActivity(i);
     }
 
     public void searchActivity(View view) {
         Intent i = new Intent(this, SearchActivity.class);
+        i.putExtra("site", site);
         startActivity(i);
     }
 }
