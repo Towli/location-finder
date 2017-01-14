@@ -8,28 +8,37 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import uk.ac.uea.roomfinder.R;
+import uk.ac.uea.roomfinder.framework.implementation.Building;
+import uk.ac.uea.roomfinder.framework.implementation.Site;
 
 public class BrowseActivity extends AppCompatActivity {
 
     ListView listView;
-    List<String> testItems;
     ArrayAdapter<String> adapter;
+    List<String> testItems;
+    Site site;
+    List<String> buildingNames;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse);
 
-        /* Populate array for test purposes */
-        testItems = populateTestList(20);
+        /* Get Serialized Site object from Intent */
+        site = (Site)getIntent().getSerializableExtra("site");
+
+        /* Set list of building names for the adapter */
+        buildingNames = new ArrayList<>();
+        for (Building b : site.getBuildings())
+                buildingNames.add(b.getName());
+
         listView = (ListView)findViewById(R.id.location_list);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, testItems);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, buildingNames);
         listView.setAdapter(adapter);
 
         /* Set an OnClick listener for items in ListView */

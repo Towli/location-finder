@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.uea.roomfinder.R;
+import uk.ac.uea.roomfinder.framework.implementation.Building;
+import uk.ac.uea.roomfinder.framework.implementation.Site;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -20,17 +22,25 @@ public class SearchActivity extends AppCompatActivity {
     ListView listView;
     ArrayAdapter<String> adapter;
     List<String> testItems;
+    Site site;
+    List<String> buildingNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_search);
 
-        /* Populate array for test purposes */
-        testItems = populateTestList(20);
+       /* Get Serialized Site object from Intent */
+        site = (Site)getIntent().getSerializableExtra("site");
+
+        /* Set list of building names for the adapter */
+        buildingNames = new ArrayList<>();
+        for (Building b : site.getBuildings())
+            buildingNames.add(b.getName());
+
         listView = (ListView)findViewById(R.id.list_view);
         searchView = (SearchView)findViewById(R.id.search_view);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, testItems);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, buildingNames);
         listView.setAdapter(adapter);
 
         /* Set query listener on SearchView */
