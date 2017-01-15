@@ -62,7 +62,8 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(SearchActivity.this, DetailsActivity.class);
-                i.putExtra("id", id);
+                Building selected = site.getBuildings().get((int)id);
+                i.putExtra("building", selected);
                 startActivity(i);
             }
         });
