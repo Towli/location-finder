@@ -5,11 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import uk.ac.uea.roomfinder.R;
 import uk.ac.uea.roomfinder.framework.implementation.AndroidCSVParser;
 import uk.ac.uea.roomfinder.framework.implementation.Building;
+import uk.ac.uea.roomfinder.framework.implementation.Point;
 import uk.ac.uea.roomfinder.framework.implementation.Site;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,7 +24,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.view_main);
 
         site = new Site();
-        site.setBuildings(new AndroidCSVParser().parse("map_data.csv", this));
+        List<List<String>> csv = new AndroidCSVParser().parse("map_data.csv", this);
+        List<Building> buildings = new ArrayList<>();
+
+        for(List<String> lines : csv) {
+            if(lines.get(0).equals("building")) {
+                buildings.add(new Building(lines.get(1), new Point(lines.get(2), lines.get(3)),
+                        lines.get(5), lines.get(4)));
+            }
+        }
+
+        site.setBuildings(buildings);
     }
 
     public void browseActivity(View view) {
