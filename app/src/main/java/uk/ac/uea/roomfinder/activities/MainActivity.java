@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
         List<List<String>> csv = new AndroidCSVParser().parse("map_data.csv", this);
         List<Building> buildings = new ArrayList<>();
 
-        for(List<String> lines : csv) {
-            if(lines.get(0).equals("building")) {
-                buildings.add(new Building(lines.get(1), new Point(lines.get(2), lines.get(3)),
-                        lines.get(5), lines.get(4)));
+        for(List<String> line : csv) {
+            if(line.get(0).equals("building")) {
+                buildings.add(new Building(line.get(1), new Point(line.get(2), line.get(3)),
+                        line.get(5), line.get(4)));
             }
         }
 
