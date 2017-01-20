@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import uk.ac.uea.framework.implementation.Building;
 import uk.ac.uea.roomfinder.R;
-import uk.ac.uea.roomfinder.framework.implementation.Building;
 
 public class DetailsActivity extends AppCompatActivity {
 

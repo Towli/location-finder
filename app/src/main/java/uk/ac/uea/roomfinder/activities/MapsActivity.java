@@ -11,8 +11,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import uk.ac.uea.framework.implementation.Point;
 import uk.ac.uea.roomfinder.R;
-import uk.ac.uea.roomfinder.framework.implementation.Point;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 

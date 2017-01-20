@@ -8,11 +8,11 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.ac.uea.framework.implementation.AndroidCSVParser;
+import uk.ac.uea.framework.implementation.Building;
+import uk.ac.uea.framework.implementation.Point;
+import uk.ac.uea.framework.implementation.Site;
 import uk.ac.uea.roomfinder.R;
-import uk.ac.uea.roomfinder.framework.implementation.AndroidCSVParser;
-import uk.ac.uea.roomfinder.framework.implementation.Building;
-import uk.ac.uea.roomfinder.framework.implementation.Point;
-import uk.ac.uea.roomfinder.framework.implementation.Site;
 
 public class MainActivity extends AppCompatActivity {
 
