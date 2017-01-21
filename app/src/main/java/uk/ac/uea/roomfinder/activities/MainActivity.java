@@ -5,10 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.uea.framework.implementation.AndroidCSVParser;
+import uk.ac.uea.framework.implementation.AndroidInternalFileIO;
 import uk.ac.uea.framework.implementation.Building;
 import uk.ac.uea.framework.implementation.Point;
 import uk.ac.uea.framework.implementation.Site;
@@ -35,6 +40,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         site.setBuildings(buildings);
+
+
+        try {
+            new AndroidInternalFileIO().writeString("hi", "hi", this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            String k = new AndroidInternalFileIO().readString("hi", this);
+            System.out.println(k);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void browseActivity(View view) {
