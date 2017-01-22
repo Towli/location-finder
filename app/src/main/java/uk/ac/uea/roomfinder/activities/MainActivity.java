@@ -42,18 +42,10 @@ public class MainActivity extends AppCompatActivity {
         site.setBuildings(buildings);
 
 
-        try {
-            new AndroidInternalFileIO().writeString("hi", "hi", this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        new AndroidInternalFileIO().writeObject(buildings, "test", this);
 
-        try {
-            String k = new AndroidInternalFileIO().readString("hi", this);
-            System.out.println(k);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        List<Building> test = (List<Building>) new AndroidInternalFileIO().readObject("test", this);
+        System.out.println(test.get(0).getName());
 
     }
 
