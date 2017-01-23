@@ -1,6 +1,8 @@
 package uk.ac.uea.roomfinder.activities;
 
+import android.app.FragmentManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,11 +23,10 @@ import uk.ac.uea.framework.implementation.Building;
 import uk.ac.uea.framework.implementation.Point;
 import uk.ac.uea.framework.implementation.Site;
 import uk.ac.uea.roomfinder.R;
-import uk.ac.uea.roomfinder.activities.BrowseActivity;
-import uk.ac.uea.roomfinder.activities.SearchActivity;
+import uk.ac.uea.roomfinder.fragments.SearchFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, SearchFragment.OnFragmentInteractionListener {
 
     Site site;
 
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
     public void browseActivity(View view) {
@@ -116,6 +119,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        FragmentManager fragmentManager = getFragmentManager();
+        Bundle bundle = new Bundle();
+
         if (id == R.id.nav_home) {
             System.out.println("Nav item pressed: Home");
         } else if (id == R.id.nav_browse) {
@@ -123,9 +129,10 @@ public class MainActivity extends AppCompatActivity
             i.putExtra("site", site);
             startActivity(i);
         } else if (id == R.id.nav_search) {
-            Intent i = new Intent(this, SearchActivity.class);
-            i.putExtra("site", site);
-            startActivity(i);
+            bundle.putSerializable("site", site);
+            SearchFragment searchFragment = new SearchFragment();
+            searchFragment.setArguments(bundle);
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, searchFragment).addToBackStack(null).commit();
         } else if (id == R.id.nav_help) {
             Intent i = new Intent(this, HelpActivity.class);
             startActivity(i);
@@ -134,5 +141,10 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
