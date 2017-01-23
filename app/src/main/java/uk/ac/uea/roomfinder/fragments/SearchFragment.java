@@ -1,14 +1,26 @@
 package uk.ac.uea.roomfinder.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SearchView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import uk.ac.uea.framework.implementation.Building;
+import uk.ac.uea.framework.implementation.Site;
 import uk.ac.uea.roomfinder.R;
+import uk.ac.uea.roomfinder.activities.DetailsActivity;
+import uk.ac.uea.roomfinder.activities.SearchActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +33,11 @@ import uk.ac.uea.roomfinder.R;
 public class SearchFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    SearchView searchView;
+    ListView listView;
+    ArrayAdapter<String> adapter;
+    Site site;
+    List<String> buildingNames;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -34,7 +51,6 @@ public class SearchFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment SearchFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static SearchFragment newInstance() {
         SearchFragment fragment = new SearchFragment();
         Bundle args = new Bundle();
@@ -43,15 +59,49 @@ public class SearchFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
+
+        /* Get Serialized Site object from Intent */
+        site = (Site)getArguments().getSerializable("site");
+
+        /* Set list of building names for the adapter */
+        buildingNames = new ArrayList<>();
+        for (Building b : site.getBuildings())
+            buildingNames.add(b.getName());
+
+        listView = (ListView)view.findViewById(R.id.list_view);
+        searchView = (SearchView)view.findViewById(R.id.search_view);
+        adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, buildingNames);
+        listView.setAdapter(adapter);
+
+        /* Set query listener on SearchView */
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        /* Set an OnClick listener for items in ListView */
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println("Item at position "+position+" clicked");
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
