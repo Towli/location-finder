@@ -19,7 +19,7 @@ import uk.ac.uea.framework.implementation.Point;
 import uk.ac.uea.framework.implementation.Site;
 import uk.ac.uea.roomfinder.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
 
     Site site;
 
