@@ -10,7 +10,28 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="uk.ac.uea.roomfinder.MainActivity"
+    tools:context="uk.ac.uea.roomfinder.activities.MainActivity"
     tools:showIn="@layout/app_bar_main">
+
+    <Button
+        android:text="BROWSE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:id="@+id/browse_btn"
+        android:layout_below="@+id/search_btn"
+        android:layout_centerHorizontal="true"
+        android:onClick="browseActivity" />
+
+    <Button
+        android:text="SEARCH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="135dp"
+        android:id="@+id/search_btn"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/browse_btn"
+        android:onClick="searchActivity"
+        android:layout_alignEnd="@+id/browse_btn" />
 
 </RelativeLayout>
