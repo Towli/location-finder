@@ -59,12 +59,7 @@ public class SearchFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
+    public void onCreate(Bundle savedInstanceState) {
 
         /* Get Serialized Site object from Intent */
         site = (Site)getArguments().getSerializable("site");
@@ -74,6 +69,17 @@ public class SearchFragment extends Fragment {
         for (Building b : site.getBuildings())
             buildingNames.add(b.getName());
 
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        /* Store inflated view so we can use a context for layout resources */
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
+
+        /* Gather views by id */
         listView = (ListView)view.findViewById(R.id.list_view);
         searchView = (SearchView)view.findViewById(R.id.search_view);
         adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, buildingNames);
