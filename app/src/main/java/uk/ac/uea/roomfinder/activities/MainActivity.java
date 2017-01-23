@@ -23,10 +23,12 @@ import uk.ac.uea.framework.implementation.Building;
 import uk.ac.uea.framework.implementation.Point;
 import uk.ac.uea.framework.implementation.Site;
 import uk.ac.uea.roomfinder.R;
+import uk.ac.uea.roomfinder.fragments.BrowseFragment;
 import uk.ac.uea.roomfinder.fragments.SearchFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, SearchFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        SearchFragment.OnFragmentInteractionListener, BrowseFragment.OnFragmentInteractionListener {
 
     Site site;
 
@@ -125,9 +127,10 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             System.out.println("Nav item pressed: Home");
         } else if (id == R.id.nav_browse) {
-            Intent i = new Intent(this, BrowseActivity.class);
-            i.putExtra("site", site);
-            startActivity(i);
+            bundle.putSerializable("site", site);
+            BrowseFragment browseFragment = new BrowseFragment();
+            browseFragment.setArguments(bundle);
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, browseFragment).addToBackStack(null).commit();
         } else if (id == R.id.nav_search) {
             bundle.putSerializable("site", site);
             SearchFragment searchFragment = new SearchFragment();
