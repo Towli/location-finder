@@ -1,6 +1,5 @@
 package uk.ac.uea.roomfinder.fragments;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,35 +7,27 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.SearchView;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.widget.TextView;
 
 import uk.ac.uea.framework.implementation.Building;
-import uk.ac.uea.framework.implementation.Site;
 import uk.ac.uea.roomfinder.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link BrowseFragment.OnFragmentInteractionListener} interface
+ * {@link DetailsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link BrowseFragment#newInstance} factory method to
+ * Use the {@link DetailsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BrowseFragment extends Fragment {
+public class DetailsFragment extends Fragment {
 
+    TextView roomName;
+    TextView location;
+    Building building;
     private OnFragmentInteractionListener mListener;
-    ListView listView;
-    ArrayAdapter<String> adapter;
-    Site site;
-    List<String> buildingNames;
 
-    public BrowseFragment() {
+    public DetailsFragment() {
         // Required empty public constructor
     }
 
@@ -46,11 +37,11 @@ public class BrowseFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BrowseFragment.
+     * @return A new instance of fragment DetailsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static BrowseFragment newInstance(String param1, String param2) {
-        BrowseFragment fragment = new BrowseFragment();
+    public static DetailsFragment newInstance(String param1, String param2) {
+        DetailsFragment fragment = new DetailsFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -58,15 +49,6 @@ public class BrowseFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
-        /* Get Serialized Site object from Intent */
-        site = (Site)getArguments().getSerializable("site");
-
-        /* Set list of building names for the adapter */
-        buildingNames = new ArrayList<>();
-        for (Building b : site.getBuildings())
-            buildingNames.add(b.getName());
-
         super.onCreate(savedInstanceState);
     }
 
@@ -74,23 +56,27 @@ public class BrowseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-         /* Store inflated view so we can use a context for layout resources */
-        View view = inflater.inflate(R.layout.fragment_browse, container, false);
+        /* Store inflated view so we can use a context for layout resources */
+        View view = inflater.inflate(R.layout.fragment_details, container, false);
 
         /* Gather views by id */
-        listView = (ListView)view.findViewById(R.id.location_list);
-        adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, buildingNames);
-        listView.setAdapter(adapter);
+        roomName = (TextView)view.findViewById(R.id.name_tv);
+        location = (TextView)view.findViewById(R.id.description_tv);
 
-        /* Set an OnClick listener for items in ListView */
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mListener.onBuildingSelected((int)id);
-            }
-        });
+        /* Get intent and use passed data */
+        building = (Building)getArguments().getSerializable("building");
+        roomName.setText(building.getName());
+        location.setText(building.getCenter().toString());
 
+        // Inflate the layout for this fragment
         return view;
+    }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.test();
+        }
     }
 
     @Override
@@ -121,6 +107,7 @@ public class BrowseFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        void onBuildingSelected(int id);
+        // TODO: Update argument type and name
+        void test();
     }
 }

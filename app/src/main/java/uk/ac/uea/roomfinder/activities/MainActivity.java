@@ -24,11 +24,13 @@ import uk.ac.uea.framework.implementation.Point;
 import uk.ac.uea.framework.implementation.Site;
 import uk.ac.uea.roomfinder.R;
 import uk.ac.uea.roomfinder.fragments.BrowseFragment;
+import uk.ac.uea.roomfinder.fragments.DetailsFragment;
 import uk.ac.uea.roomfinder.fragments.SearchFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        SearchFragment.OnFragmentInteractionListener, BrowseFragment.OnFragmentInteractionListener {
+        SearchFragment.OnFragmentInteractionListener, BrowseFragment.OnFragmentInteractionListener,
+        DetailsFragment.OnFragmentInteractionListener{
 
     Site site;
 
@@ -148,6 +150,24 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onBuildingSelected(int id) {
+        FragmentManager fragmentManager = getFragmentManager();
+        Bundle bundle = new Bundle();
+
+        Building selected = site.getBuildings().get(id);
+        bundle.putSerializable("building", selected);
+
+        DetailsFragment detailsFragment = new DetailsFragment();
+        detailsFragment.setArguments(bundle);
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, detailsFragment).addToBackStack(null).commit();
+    }
+
+    @Override
+    public void test() {
 
     }
 }
