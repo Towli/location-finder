@@ -7,27 +7,17 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_height="200dp"
+        android:layout_gravity="bottom"
         android:gravity="center">
 
         <TextView
             android:text="TextView"
+            android:textSize="28dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="108dp"
             android:id="@+id/name_tv" />
-
-        <ImageView
-            android:layout_width="300px"
-            android:layout_height="300px"
-            app:srcCompat="@android:drawable/ic_menu_gallery"
-            android:id="@+id/imageView"
-            android:layout_above="@+id/route_btn"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="17dp" />
 
         <TextView
             android:text="Location description"
@@ -40,13 +30,12 @@
 
         <Button
             android:text="Route"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="73dp"
+            android:layout_width="wrap_content"
             android:onClick="mapActivity"
-            android:id="@+id/route_btn" />
+            android:id="@+id/route_btn"
+            android:layout_below="@+id/name_tv"
+            android:layout_centerHorizontal="true" />
 
     </LinearLayout>
 
