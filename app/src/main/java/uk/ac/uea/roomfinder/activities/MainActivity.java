@@ -149,11 +149,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
     public void onBuildingSelected(int id) {
         FragmentManager fragmentManager = getFragmentManager();
         Bundle bundle = new Bundle();
@@ -167,7 +162,5 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void test() {
-
-    }
+    public void test() {}
 }

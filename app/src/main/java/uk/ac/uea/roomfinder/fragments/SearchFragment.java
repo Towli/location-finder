@@ -19,8 +19,6 @@ import java.util.List;
 import uk.ac.uea.framework.implementation.Building;
 import uk.ac.uea.framework.implementation.Site;
 import uk.ac.uea.roomfinder.R;
-import uk.ac.uea.roomfinder.activities.DetailsActivity;
-import uk.ac.uea.roomfinder.activities.SearchActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -103,7 +101,7 @@ public class SearchFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("Item at position "+position+" clicked");
+                mListener.onBuildingSelected((int)id);
             }
         });
 
@@ -111,11 +109,7 @@ public class SearchFragment extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+    public void onButtonPressed(Uri uri) {}
 
     @Override
     public void onAttach(Context context) {
@@ -146,6 +140,6 @@ public class SearchFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onBuildingSelected(int id);
     }
 }
