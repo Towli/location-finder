@@ -1,7 +1,6 @@
 package uk.ac.uea.roomfinder.activities;
 
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,6 +23,7 @@ import uk.ac.uea.framework.implementation.Site;
 import uk.ac.uea.roomfinder.R;
 import uk.ac.uea.roomfinder.fragments.BrowseFragment;
 import uk.ac.uea.roomfinder.fragments.DetailsFragment;
+import uk.ac.uea.roomfinder.fragments.HelpFragment;
 import uk.ac.uea.roomfinder.fragments.HomeFragment;
 import uk.ac.uea.roomfinder.fragments.SearchFragment;
 
@@ -153,8 +153,8 @@ public class MainActivity extends AppCompatActivity
             searchFragment.setArguments(bundle);
             fragmentManager.beginTransaction().replace(R.id.fragment_container, searchFragment).addToBackStack(null).commit();
         } else if (id == R.id.nav_help) {
-            Intent i = new Intent(this, HelpActivity.class);
-            startActivity(i);
+            HelpFragment helpFragment = new HelpFragment();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, helpFragment).addToBackStack(null).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
