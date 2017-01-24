@@ -2,7 +2,6 @@ package uk.ac.uea.roomfinder.activities;
 
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,14 +24,17 @@ import uk.ac.uea.framework.implementation.Site;
 import uk.ac.uea.roomfinder.R;
 import uk.ac.uea.roomfinder.fragments.BrowseFragment;
 import uk.ac.uea.roomfinder.fragments.DetailsFragment;
+import uk.ac.uea.roomfinder.fragments.HomeFragment;
 import uk.ac.uea.roomfinder.fragments.SearchFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         SearchFragment.OnFragmentInteractionListener, BrowseFragment.OnFragmentInteractionListener,
-        DetailsFragment.OnFragmentInteractionListener{
+        DetailsFragment.OnFragmentInteractionListener {
 
-    Site site;
+    private static Site site;
+    private static FragmentManager fragmentManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,6 @@ public class MainActivity extends AppCompatActivity
 
         site.setBuildings(buildings);
 
-
         new AndroidInternalFileIO().writeObject(buildings, "test", this);
 
         List<Building> test = (List<Building>) new AndroidInternalFileIO().readObject("test", this);
@@ -70,19 +71,31 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        /* Replace fragment container with HomeFragment layout */
+        fragmentManager = getFragmentManager();
+
+        HomeFragment homeFragment = new HomeFragment();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, homeFragment).addToBackStack(null).commit();
+
 
     }
 
     public void browseActivity(View view) {
-        Intent i = new Intent(this, BrowseActivity.class);
-        i.putExtra("site", site);
-        startActivity(i);
+        fragmentManager = getFragmentManager();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("site", site);
+        BrowseFragment browseFragment = new BrowseFragment();
+        browseFragment.setArguments(bundle);
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, browseFragment).addToBackStack(null).commit();
     }
 
     public void searchActivity(View view) {
-        Intent i = new Intent(this, SearchActivity.class);
-        i.putExtra("site", site);
-        startActivity(i);
+        fragmentManager = getFragmentManager();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("site", site);
+        SearchFragment searchFragment = new SearchFragment();
+        searchFragment.setArguments(bundle);
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, searchFragment).addToBackStack(null).commit();
     }
 
     @Override
@@ -123,11 +136,12 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager = getFragmentManager();
         Bundle bundle = new Bundle();
 
         if (id == R.id.nav_home) {
-            System.out.println("Nav item pressed: Home");
+            HomeFragment homeFragment = new HomeFragment();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, homeFragment).addToBackStack(null).commit();
         } else if (id == R.id.nav_browse) {
             bundle.putSerializable("site", site);
             BrowseFragment browseFragment = new BrowseFragment();
@@ -150,7 +164,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBuildingSelected(int id) {
-        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager = getFragmentManager();
         Bundle bundle = new Bundle();
 
         Building selected = site.getBuildings().get(id);
