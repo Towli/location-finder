@@ -1,6 +1,6 @@
 package uk.ac.uea.roomfinder.activities;
 
-import android.app.FragmentManager;
+import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -74,14 +74,14 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         /* Replace fragment container with HomeFragment layout */
-        fragmentManager = getFragmentManager();
+        fragmentManager = getSupportFragmentManager();
 
         HomeFragment homeFragment = new HomeFragment();
         fragmentManager.beginTransaction().replace(R.id.fragment_container, homeFragment).addToBackStack(null).commit();
     }
 
     public void browseActivity(View view) {
-        fragmentManager = getFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         Bundle bundle = new Bundle();
         bundle.putSerializable("site", site);
         BrowseFragment browseFragment = new BrowseFragment();
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void searchActivity(View view) {
-        fragmentManager = getFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         Bundle bundle = new Bundle();
         bundle.putSerializable("site", site);
         SearchFragment searchFragment = new SearchFragment();
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        fragmentManager = getFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         Bundle bundle = new Bundle();
 
         if (id == R.id.nav_home) {
@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBuildingSelected(Building building) {
         Building selected = building;
-        fragmentManager = getFragmentManager();
+        fragmentManager = getSupportFragmentManager();
 
         /* Pass intent to MapsActivity */
         Intent i = new Intent(this, MapsActivity.class);
@@ -173,12 +173,16 @@ public class MainActivity extends AppCompatActivity
         startActivity(i);
     }
 
+    @Override
+    public void onBuildingSelected(int id) {
+        Building selected = site.getBuildings().get(id);
+
+        /* Pass intent to MapsActivity */
+        Intent i = new Intent(this, MapsActivity.class);
+        i.putExtra("building", selected);
+        startActivity(i);
+    }
 
     @Override
     public void onRoutePressed() {}
-
-    @Override
-    public void onBuildingSelected(int id) {
-
-    }
 }

@@ -1,10 +1,10 @@
 package uk.ac.uea.roomfinder.fragments;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,7 +102,9 @@ public class SearchFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String buildingName = listView.getItemAtPosition(position).toString();
+                System.out.println(buildingName);
                 for (Building b : site.getBuildings()) {
+                    System.out.println(b.getName());
                     if (b.getName().equals(buildingName))
                         mListener.onBuildingSelected(b);
                 }
@@ -127,6 +129,17 @@ public class SearchFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) activity;
+        } else {
+            throw new RuntimeException(activity.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
@@ -143,7 +156,6 @@ public class SearchFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onBuildingSelected(Building building);
     }
 }
