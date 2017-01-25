@@ -1,17 +1,20 @@
 package uk.ac.uea.roomfinder.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.SupportMapFragment;
 
 import uk.ac.uea.framework.implementation.Building;
+import uk.ac.uea.framework.implementation.DeviceMap;
 import uk.ac.uea.roomfinder.R;
 
 /**
@@ -22,11 +25,12 @@ import uk.ac.uea.roomfinder.R;
  * Use the {@link DetailsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DetailsFragment extends Fragment {
+public class DetailsFragment extends Fragment implements View.OnClickListener {
 
     TextView roomName;
     TextView description;
     Building building;
+    Button routeBtn;
     private OnFragmentInteractionListener mListener;
 
     public DetailsFragment() {
@@ -64,6 +68,10 @@ public class DetailsFragment extends Fragment {
         /* Gather views by id */
         roomName = (TextView)view.findViewById(R.id.name_tv);
         description = (TextView)view.findViewById(R.id.description_tv);
+        routeBtn = (Button)view.findViewById(R.id.route_btn);
+
+        /* Set on-click listeners */
+        routeBtn.setOnClickListener(this);
 
         /* Get intent and use passed data */
         building = (Building)getArguments().getSerializable("building");
@@ -96,6 +104,16 @@ public class DetailsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        String longitude = Double.toString(building.getCenter().getLongitude());
+        String latitude = Double.toString(building.getCenter().getLatitude());
+        Uri gmmIntentUri = Uri.parse("google.navigation:q="+latitude+","+longitude+"");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
     }
 
     /**

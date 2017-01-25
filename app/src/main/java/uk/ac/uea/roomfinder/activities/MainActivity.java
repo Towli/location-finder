@@ -20,6 +20,7 @@ import java.util.List;
 import uk.ac.uea.framework.implementation.AndroidCSVParser;
 import uk.ac.uea.framework.implementation.AndroidInternalFileIO;
 import uk.ac.uea.framework.implementation.Building;
+import uk.ac.uea.framework.implementation.DeviceLocation;
 import uk.ac.uea.framework.implementation.Point;
 import uk.ac.uea.framework.implementation.Site;
 import uk.ac.uea.roomfinder.R;
@@ -36,11 +37,15 @@ public class MainActivity extends AppCompatActivity
 
     private static Site site;
     private static FragmentManager fragmentManager;
+    private static DeviceLocation deviceLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /* Get DeviceLocation */
+        deviceLocation = new DeviceLocation(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,7 +67,6 @@ public class MainActivity extends AppCompatActivity
 
         List<Building> test = (List<Building>) new AndroidInternalFileIO().readObject("test", this);
         System.out.println(test.get(0).getName());
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -165,11 +169,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBuildingSelected(Building building) {
         Building selected = building;
-        fragmentManager = getSupportFragmentManager();
+
+        Point currentLocation = new Point(deviceLocation.getCurrentLocation().getLatitude(),
+                deviceLocation.getCurrentLocation().getLongitude());
 
         /* Pass intent to MapsActivity */
         Intent i = new Intent(this, MapsActivity.class);
         i.putExtra("building", selected);
+        i.putExtra("currentLocation", currentLocation);
         startActivity(i);
     }
 
@@ -177,12 +184,18 @@ public class MainActivity extends AppCompatActivity
     public void onBuildingSelected(int id) {
         Building selected = site.getBuildings().get(id);
 
+        Point currentLocation = new Point(deviceLocation.getCurrentLocation().getLatitude(),
+                deviceLocation.getCurrentLocation().getLongitude());
+
         /* Pass intent to MapsActivity */
         Intent i = new Intent(this, MapsActivity.class);
         i.putExtra("building", selected);
+        i.putExtra("currentLocation", currentLocation);
         startActivity(i);
     }
 
     @Override
-    public void onRoutePressed() {}
+    public void onRoutePressed() {
+        System.out.println("Route pressed");
+    }
 }

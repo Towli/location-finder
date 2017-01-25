@@ -1,6 +1,7 @@
 package uk.ac.uea.roomfinder.activities;
 
 import android.content.Intent;
+import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.telecom.Call;
@@ -24,6 +25,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private Building building;
+    private DeviceLocation deviceLocation;
+    private Point currentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +37,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        /* Get Serializable Extra */
+        /* Get Serializable Extras */
         building = (Building)getIntent().getSerializableExtra("building");
+        currentLocation = (Point)getIntent().getSerializableExtra("currentLocation");
 
         /* Initialise & inflate details fragment */
         Bundle bundle = new Bundle();
         bundle.putSerializable("building", building);
         DetailsFragment detailsFragment = new DetailsFragment();
         detailsFragment.setArguments(bundle);
-        getFragmentManager().beginTransaction().replace(R.id.details_container, detailsFragment).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.details_container, detailsFragment).addToBackStack(null).commit();
+
     }
 
 
@@ -60,20 +65,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap = googleMap;
 
-        /* Device location */
-        DeviceLocation deviceLocation = new DeviceLocation(this);
-
         /* Destination location */
         Point point = building.getCenter();
 
-        /*LatLng currentLocation = new LatLng(deviceLocation.getCurrentLocation().getLatitude(),
-                deviceLocation.getCurrentLocation().getLongitude());*/
-
         // Add a marker in Sydney and move the camera
         LatLng destination = new LatLng(point.getLatitude(), point.getLongitude());
+        LatLng currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         mMap.addMarker(new MarkerOptions().position(destination).title(building.getName()));
-        //mMap.addMarker(new MarkerOptions().position(currentLocation));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(destination, 18));
+        mMap.addMarker(new MarkerOptions().position(currentLatLng).title("Your Location"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 18));
     }
 
     @Override
