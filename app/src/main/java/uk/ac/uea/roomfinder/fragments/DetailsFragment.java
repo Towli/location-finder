@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.SupportMapFragment;
+
 import uk.ac.uea.framework.implementation.Building;
 import uk.ac.uea.roomfinder.R;
 

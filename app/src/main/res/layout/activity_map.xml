@@ -5,4 +5,4 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     tools:context="uk.ac.uea.roomfinder.activities.MapsActivity"
-    android:layout_height="300dp" />
+    android:layout_height="match_parent" />
