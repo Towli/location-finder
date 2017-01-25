@@ -101,7 +101,11 @@ public class SearchFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mListener.onBuildingSelected((int)id);
+                String buildingName = listView.getItemAtPosition(position).toString();
+                for (Building b : site.getBuildings()) {
+                    if (b.getName().equals(buildingName))
+                        mListener.onBuildingSelected(b);
+                }
             }
         });
 
@@ -140,6 +144,6 @@ public class SearchFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onBuildingSelected(int id);
+        void onBuildingSelected(Building building);
     }
 }

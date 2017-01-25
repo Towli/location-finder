@@ -163,8 +163,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBuildingSelected(int id) {
-        Building selected = site.getBuildings().get(id);
+    public void onBuildingSelected(Building building) {
+        Building selected = building;
         fragmentManager = getFragmentManager();
 
         /* Pass intent to MapsActivity */
@@ -176,4 +176,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onRoutePressed() {}
+
+    @Override
+    public void onBuildingSelected(int id) {
+
+    }
 }
