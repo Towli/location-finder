@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -29,7 +30,7 @@ import uk.ac.uea.roomfinder.fragments.HomeFragment;
 import uk.ac.uea.roomfinder.fragments.SearchFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
+        implements OnNavigationItemSelectedListener,
         SearchFragment.OnFragmentInteractionListener, BrowseFragment.OnFragmentInteractionListener,
         DetailsFragment.OnFragmentInteractionListener {
 
@@ -172,6 +173,7 @@ public class MainActivity extends AppCompatActivity
         startActivity(i);
     }
 
+
     @Override
-    public void test() {}
+    public void onRoutePressed() {}
 }

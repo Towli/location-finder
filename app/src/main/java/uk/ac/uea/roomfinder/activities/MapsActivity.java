@@ -14,6 +14,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import uk.ac.uea.framework.implementation.Building;
+import uk.ac.uea.framework.implementation.DeviceLocation;
+import uk.ac.uea.framework.implementation.DeviceMap;
 import uk.ac.uea.framework.implementation.Point;
 import uk.ac.uea.roomfinder.R;
 import uk.ac.uea.roomfinder.fragments.DetailsFragment;
@@ -58,12 +60,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap = googleMap;
 
+        /* Device location */
+        DeviceLocation deviceLocation = new DeviceLocation(this);
+
+        /* Destination location */
         Point point = building.getCenter();
-        //Point point = (Point)getIntent().getSerializableExtra("point");
+
+        /*LatLng currentLocation = new LatLng(deviceLocation.getCurrentLocation().getLatitude(),
+                deviceLocation.getCurrentLocation().getLongitude());*/
 
         // Add a marker in Sydney and move the camera
         LatLng destination = new LatLng(point.getLatitude(), point.getLongitude());
         mMap.addMarker(new MarkerOptions().position(destination).title(building.getName()));
+        //mMap.addMarker(new MarkerOptions().position(currentLocation));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(destination, 18));
     }
 
@@ -73,7 +82,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void test() {
-        onBackPressed();
+    public void onRoutePressed() {
     }
 }
