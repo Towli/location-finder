@@ -1,7 +1,9 @@
 package uk.ac.uea.roomfinder.activities;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.telecom.Call;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -11,12 +13,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import uk.ac.uea.framework.implementation.Building;
 import uk.ac.uea.framework.implementation.Point;
 import uk.ac.uea.roomfinder.R;
+import uk.ac.uea.roomfinder.fragments.DetailsFragment;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, DetailsFragment.OnFragmentInteractionListener {
 
     private GoogleMap mMap;
+    private Building building;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        /* Get Serializable Extra */
+        building = (Building)getIntent().getSerializableExtra("building");
+
+        /* Initialise & inflate details fragment */
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("building", building);
+        DetailsFragment detailsFragment = new DetailsFragment();
+        detailsFragment.setArguments(bundle);
+        getFragmentManager().beginTransaction().replace(R.id.details_container, detailsFragment).addToBackStack(null).commit();
     }
 
 
@@ -43,11 +58,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap = googleMap;
 
-        Point point = (Point)getIntent().getSerializableExtra("point");
+        Point point = building.getCenter();
+        //Point point = (Point)getIntent().getSerializableExtra("point");
 
         // Add a marker in Sydney and move the camera
         LatLng destination = new LatLng(point.getLatitude(), point.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(destination).title("[destination name here]"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(destination, 20));
+        mMap.addMarker(new MarkerOptions().position(destination).title(building.getName()));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(destination, 18));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    public void test() {
+        onBackPressed();
     }
 }

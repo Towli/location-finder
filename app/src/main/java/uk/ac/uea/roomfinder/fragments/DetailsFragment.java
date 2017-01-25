@@ -25,7 +25,7 @@ import uk.ac.uea.roomfinder.R;
 public class DetailsFragment extends Fragment {
 
     TextView roomName;
-    TextView location;
+    TextView description;
     Building building;
     private OnFragmentInteractionListener mListener;
 
@@ -63,12 +63,12 @@ public class DetailsFragment extends Fragment {
 
         /* Gather views by id */
         roomName = (TextView)view.findViewById(R.id.name_tv);
-        location = (TextView)view.findViewById(R.id.description_tv);
+        description = (TextView)view.findViewById(R.id.description_tv);
 
         /* Get intent and use passed data */
         building = (Building)getArguments().getSerializable("building");
         roomName.setText(building.getName());
-        location.setText(building.getCenter().toString());
+        description.setText(building.getDescription().toString());
 
         // Inflate the layout for this fragment
         return view;

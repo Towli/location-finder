@@ -1,6 +1,7 @@
 package uk.ac.uea.roomfinder.activities;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -162,15 +163,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBuildingSelected(int id) {
-        fragmentManager = getFragmentManager();
-        Bundle bundle = new Bundle();
-
         Building selected = site.getBuildings().get(id);
-        bundle.putSerializable("building", selected);
+        fragmentManager = getFragmentManager();
 
-        DetailsFragment detailsFragment = new DetailsFragment();
-        detailsFragment.setArguments(bundle);
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, detailsFragment).addToBackStack(null).commit();
+        /* Pass intent to MapsActivity */
+        Intent i = new Intent(this, MapsActivity.class);
+        i.putExtra("building", selected);
+        startActivity(i);
     }
 
     @Override
