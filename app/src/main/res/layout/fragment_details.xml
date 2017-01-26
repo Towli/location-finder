@@ -14,7 +14,8 @@
 
         <TextView
             android:text="TextView"
-            android:textSize="28dp"
+            android:textSize="26dp"
+            android:layout_marginTop="80dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/name_tv" />
@@ -25,8 +26,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/description_tv"
             android:layout_below="@+id/name_tv"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="19dp" />
+            android:layout_centerHorizontal="true" />
 
         <Button
             style="@style/ButtonMedium"

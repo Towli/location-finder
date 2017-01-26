@@ -1,13 +1,13 @@
 <resources>
-    <string name="app_name">Room Finder</string>
+    <string name="app_name">UEA Location Finder</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">UEA Location Finder</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_help">HelpActivity</string>
+    <string name="title_activity_help">Help</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

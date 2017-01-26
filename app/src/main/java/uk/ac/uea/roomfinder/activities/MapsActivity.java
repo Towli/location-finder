@@ -12,6 +12,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import uk.ac.uea.framework.implementation.Building;
@@ -70,6 +71,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
         LatLng destination = new LatLng(point.getLatitude(), point.getLongitude());
         LatLng currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style));
         mMap.addMarker(new MarkerOptions().position(destination).title(building.getName()));
         mMap.addMarker(new MarkerOptions().position(currentLatLng).title("Your Location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(destination, 18));
@@ -77,7 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        finish();
     }
 
     @Override
