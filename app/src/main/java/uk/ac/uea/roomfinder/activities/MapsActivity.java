@@ -16,8 +16,6 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import uk.ac.uea.framework.implementation.Building;
-import uk.ac.uea.framework.implementation.DeviceLocation;
-import uk.ac.uea.framework.implementation.DeviceMap;
 import uk.ac.uea.framework.implementation.Point;
 import uk.ac.uea.roomfinder.R;
 import uk.ac.uea.roomfinder.fragments.DetailsFragment;
@@ -26,7 +24,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private Building building;
-    private DeviceLocation deviceLocation;
     private Point currentLocation;
 
     @Override
@@ -83,6 +80,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void onRoutePressed() {
-    }
+    public void onRoutePressed() {}
 }

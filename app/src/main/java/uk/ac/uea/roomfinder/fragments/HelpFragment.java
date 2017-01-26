@@ -21,7 +21,6 @@ import uk.ac.uea.roomfinder.R;
 public class HelpFragment extends Fragment {
 
     public HelpFragment() {
-        // Required empty public constructor
     }
 
     /**
@@ -32,7 +31,6 @@ public class HelpFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment HelpFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static HelpFragment newInstance(String param1, String param2) {
         HelpFragment fragment = new HelpFragment();
         Bundle args = new Bundle();
@@ -52,7 +50,6 @@ public class HelpFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_help, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {}
 
     @Override

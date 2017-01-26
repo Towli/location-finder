@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /* Parse file and gain site */
         site = new Site();
         List<List<String>> csv = new AndroidCSVParser().parse("map_data.csv", this);
         List<Building> buildings = new ArrayList<>();
@@ -214,10 +215,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBuildingSelected(int id) {
         Building selected = site.getBuildings().get(id);
-
         Point currentLocation = new Point(deviceLocation.getCurrentLocation().getLatitude(),
                 deviceLocation.getCurrentLocation().getLongitude());
-
         /* Pass intent to MapsActivity */
         Intent i = new Intent(this, MapsActivity.class);
         i.putExtra("building", selected);

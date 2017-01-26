@@ -11,10 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.SupportMapFragment;
-
 import uk.ac.uea.framework.implementation.Building;
-import uk.ac.uea.framework.implementation.DeviceMap;
 import uk.ac.uea.roomfinder.R;
 
 /**
@@ -34,7 +31,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
     private OnFragmentInteractionListener mListener;
 
     public DetailsFragment() {
-        // Required empty public constructor
+
     }
 
     /**
@@ -45,7 +42,6 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
      * @param param2 Parameter 2.
      * @return A new instance of fragment DetailsFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static DetailsFragment newInstance(String param1, String param2) {
         DetailsFragment fragment = new DetailsFragment();
         Bundle args = new Bundle();
@@ -82,7 +78,6 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onRoutePressed();
@@ -116,16 +111,6 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
         startActivity(mapIntent);
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         void onRoutePressed();
     }

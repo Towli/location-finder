@@ -17,10 +17,7 @@ public class LoadingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_loading);
 
-        //somewhere in here there should be a check if
-        //a location has already been saved.
-        //if that is the case, use that activity instead of the MainActivity
-
+        /* Wait 3 seconds before going to next activity */
         Thread timerThread = new Thread()
         {
             public void run()

@@ -21,7 +21,7 @@ import uk.ac.uea.roomfinder.R;
 public class HomeFragment extends Fragment {
 
     public HomeFragment() {
-        // Required empty public constructor
+
     }
 
     /**

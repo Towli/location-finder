@@ -34,7 +34,7 @@ public class BrowseFragment extends Fragment {
     List<String> buildingNames;
 
     public BrowseFragment() {
-        // Required empty public constructor
+
     }
 
     /**
@@ -45,7 +45,6 @@ public class BrowseFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment BrowseFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static BrowseFragment newInstance(String param1, String param2) {
         BrowseFragment fragment = new BrowseFragment();
         Bundle args = new Bundle();
@@ -107,16 +106,6 @@ public class BrowseFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         void onBuildingSelected(int id);
     }

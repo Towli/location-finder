@@ -38,7 +38,7 @@ public class SearchFragment extends Fragment {
     List<String> buildingNames;
 
     public SearchFragment() {
-        // Required empty public constructor
+
     }
 
     /**
