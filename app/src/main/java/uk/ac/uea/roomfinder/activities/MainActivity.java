@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity
 
         /* Get DeviceLocation */
         deviceLocation = new DeviceLocation(this);
+        deviceLocation.getCurrentLocation();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -82,6 +83,18 @@ public class MainActivity extends AppCompatActivity
 
         HomeFragment homeFragment = new HomeFragment();
         fragmentManager.beginTransaction().replace(R.id.fragment_container, homeFragment).addToBackStack(null).commit();
+
+        /* Handle incoming app-external intent */
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+
+        /* Handle incoming app-external intent */
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if ("text/plain".equals(type)) {
+                handleIncomingText(intent); // Handle text being sent
+            }
+        }
     }
 
     public void browseActivity(View view) {
@@ -100,6 +113,24 @@ public class MainActivity extends AppCompatActivity
         SearchFragment searchFragment = new SearchFragment();
         searchFragment.setArguments(bundle);
         fragmentManager.beginTransaction().replace(R.id.fragment_container, searchFragment).addToBackStack(null).commit();
+    }
+
+    /**
+     *
+     * @param intent
+     */
+    private void handleIncomingText(Intent intent) {
+        String incomingText = intent.getStringExtra(Intent.EXTRA_TEXT);
+
+        for (Building b : site.getBuildings()) {
+            if (b.getName().equals(incomingText)) {
+                Intent i = new Intent(this, MapsActivity.class);
+                i.putExtra("building", b);
+                Point point = new Point(1.000, 1.000);
+                i.putExtra("currentLocation", point);
+                startActivity(i);
+            }
+        }
     }
 
     @Override

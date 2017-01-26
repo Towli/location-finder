@@ -50,7 +50,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -73,7 +72,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         mMap.addMarker(new MarkerOptions().position(destination).title(building.getName()));
         mMap.addMarker(new MarkerOptions().position(currentLatLng).title("Your Location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 18));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(destination, 18));
     }
 
     @Override
