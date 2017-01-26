@@ -21,7 +21,8 @@
         android:id="@+id/title_tv" />
 
     <TextView
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        android:text="This application helps you find a point of interest on the University of East Anglia's campus. Navigate to the BROWSE menu for a list of locations, or the SEARCH menu for a searchable list of locations. Select your desired location, and you will be taken to a details page where the location is displayed on a map - here you can select the ROUTE function to gain turn-by-turn directions to the location. Have fun!"
+        android:textSize="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/description_tv"
